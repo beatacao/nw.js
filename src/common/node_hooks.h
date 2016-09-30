@@ -1,3 +1,19 @@
+#ifdef BLINK_HOOK_MAP
+#define V(type, sym, fn) BLINK_HOOK_MAP(type, sym, fn)
+#else
+#define V(type, sym, fn)
+#endif
+V(VoidPtr4Fn, "g_web_worker_start_thread", g_web_worker_start_thread_fn)
+#undef V
+
+#ifdef PLATFORM_HOOK_MAP
+#define V(type, sym, fn) PLATFORM_HOOK_MAP(type, sym, fn)
+#else
+#define V(type, sym, fn)
+#endif
+V(VoidPtr2Fn, "g_web_worker_thread_new", g_web_worker_thread_new_fn)
+#undef V
+
 #ifdef NW_HOOK_INIT
 #define V(type, sym, fn) NW_HOOK_INIT(type, sym, fn)
 #else
@@ -21,6 +37,7 @@ V(RunAtExitFn, "g_run_at_exit", g_run_at_exit_fn)
 #else
 #define V(type, sym, fn) NW_HOOK_MAP(type, sym, fn)
 #endif
+V(VoidVoidFn, "g_stop_nw_instance", g_stop_nw_instance_fn)
 V(VoidHookFn, "g_msg_pump_ctor", g_msg_pump_ctor_fn)
 V(VoidHookFn, "g_msg_pump_dtor", g_msg_pump_dtor_fn)
 V(VoidHookFn, "g_msg_pump_sched_work", g_msg_pump_sched_work_fn)
